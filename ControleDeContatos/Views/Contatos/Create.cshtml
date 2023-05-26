@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ContatoModel
+@{
     ViewData["Title"] = "Cadastrar contato";
 }
 
@@ -8,16 +9,16 @@
 
 </div>
 
-<form>
+<form asp-controller="Contatos" asp-action="Create" method="post">
     <div class="mb-3">
         <label for="nome" class="form-label">Nome</label>
-        <input type="text" class="form-control" id="nome" placeholder="Lucas Mendes">
+        <input type="text" class="form-control" asp-for="Nome" placeholder="Lucas Mendes">
 
         <label for="email" class="form-label">E-mail</label>
-        <input type="email" class="form-control" id="email" placeholder="lucas@gmail.com">
+        <input type="email" class="form-control" asp-for="Email" placeholder="lucas@gmail.com">
 
         <label for="contato" class="form-label">Contato</label>
-        <input type="number" class="form-control" id="contato" placeholder="997739612">
+        <input type="number" class="form-control" asp-for="Celular" placeholder="997739612">
     </div>
 
     <button type="submit" class="btn btn-success">Criar</button>
