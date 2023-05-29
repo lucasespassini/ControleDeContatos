@@ -23,25 +23,40 @@ namespace ControleDeContatos.Controllers
             return View();
         }
 
-        public IActionResult Update()
+        public IActionResult Update(int id)
         {
-            return View();
+            var contato = _contatoRepositorio.FindById(id);
+            return View(contato);
         }
 
-        public IActionResult Delete()
+        public IActionResult ConfirmDelete(int id)
         {
-            return View();
-        }
-
-        public IActionResult ConfirmDelete()
-        {
-            return View();
+            var contato = _contatoRepositorio.FindById(id);
+            return View(contato);
         }
 
         [HttpPost]
         public IActionResult Create(ContatoModel contato)
         {
-            _contatoRepositorio.Create(contato);
+            if (ModelState.IsValid)
+            {
+                _contatoRepositorio.Create(contato);
+                return RedirectToAction("Index");
+            }
+
+            return View(contato);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateChanges(ContatoModel contato)
+        {
+            _contatoRepositorio.Update(contato);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _contatoRepositorio.Delete(id);
             return RedirectToAction("Index");
         }
     }
